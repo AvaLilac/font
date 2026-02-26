@@ -1,1 +1,1 @@
-alert('It loads');
+console.log('test');
