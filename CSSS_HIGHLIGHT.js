@@ -1,21 +1,23 @@
 (function () {
-  if (window.__AVIA_WHITE_HOME__) return;
-  window.__AVIA_WHITE_HOME__ = true;
+  if (window.__AVIA_WHITE_SIDEBAR__) return;
+  window.__AVIA_WHITE_SIDEBAR__ = true;
 
-  function makeWhite() {
-    const buttons = document.querySelectorAll("div.cursor_pointer");
+  const style = document.createElement("style");
+  style.id = "avia-white-sidebar";
 
-    buttons.forEach(btn => {
-      if (btn.textContent.trim() === "Home") {
-        btn.style.background = "#ffffff";
-        btn.style.color = "#000000";
-        btn.style.setProperty("--color", "#000000");
-      }
-    });
-  }
+  style.textContent = `
+    /* Main channel sidebar */
+    [class*="w_var(--layout-width-channel-sidebar)"] {
+      background: #ffffff !important;
+      background-color: #ffffff !important;
+    }
 
-  const observer = new MutationObserver(makeWhite);
-  observer.observe(document.body, { childList: true, subtree: true });
+    /* Fix text color so it stays readable */
+    [class*="w_var(--layout-width-channel-sidebar)"] * {
+      color: #000000 !important;
+      fill: #000000 !important;
+    }
+  `;
 
-  makeWhite();
+  document.head.appendChild(style);
 })();
